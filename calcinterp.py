@@ -58,7 +58,7 @@ def eval_stmts(stmts, env):
 
 def eval_stmt(stmt, env):
 	stype = stmt[0]
-	print stype
+	# print stype
 	if stype == "if":
 		cexp = stmt[1]
 		then_branch = stmt[2]
@@ -90,8 +90,8 @@ def eval_stmt(stmt, env):
 
 def eval_exp(exp, env):
 	etype = exp[0]
-	print "eval_exp: ",
-	print exp
+	# print "eval_exp: ",
+	# print exp
 
 	if etype == "identifier":
 		vname = exp[1]
@@ -137,7 +137,6 @@ def eval_exp(exp, env):
 		elif op == ">=":
 			return a >= b
 		elif op == ">":
-			print a > b
 			return a > b
 		elif op == "&&":
 			return a and b
@@ -188,5 +187,5 @@ def interpret(ast):
 	global_env = (None, {"calculator output" : ""})
 	for elt in ast:
 		eval_elt(elt, global_env)
-		env_debug(global_env)
+		# env_debug(global_env)
 	return global_env[1]["calculator output"]

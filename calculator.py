@@ -22,5 +22,5 @@ case_1 = '''
 calclexer = lex.lex(module=calctokens)
 calcparser = yacc.yacc(module=calcgrammar, tabmodule='parsetab')
 ast = calcparser.parse(case_1, lexer=calclexer)
-print ast
+# print ast
 print calcinterp.interpret(ast)
