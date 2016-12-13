@@ -6,9 +6,11 @@ which has its own programming language, and is very easy to learn.
 ## **Prerequisite**
 - Build language: Python 2.7
 - Package: ply
+
 ## **Language**
 ### Basic grammar
 #### Reserved keyword
+
 | Keyword   | Usage                 |
 |---------  |-----------------------|
 | define    | declare a variable    |
@@ -18,6 +20,7 @@ which has its own programming language, and is very easy to learn.
 | else      | implement branch      |
 | true      | boolean value         |
 | false     | boolean value         |
+
 #### Identifier
 - All identifier begins with letters (A-Z or a-z)
 - There can be letters or underscore after the first 
@@ -25,8 +28,10 @@ which has its own programming language, and is very easy to learn.
 - Identifier can not be reserved keyword
 - Valid identifier: age, length_of_table
 - Invalid indentifier: _age, lengt1_of_table
+
 #### Operators
 ##### Arithmetic operators
+
 | Operators | Name      | Example       | Precedence |
 |-----------|:----------|:--------------|:----------:|
 | \*        | time      | 3 \* 5 = 15   | 1          |
@@ -34,7 +39,9 @@ which has its own programming language, and is very easy to learn.
 | %         | mod       | 40 % 3 = 1    | 1          |
 | \+        | plus      | 1 + 1 = 2     | 2          |
 | \-        | minus     | 13 - 6 = 7    | 2          |
-##### Relational operators
+
+##### Relational 
+
 | Operators | Name                      | Example       | Precedence |
 |-----------|:--------------------------|:--------------|:----------:|
 | \>=       | greater than or equal to  | 5 >= 3        | 1          |
@@ -42,7 +49,9 @@ which has its own programming language, and is very easy to learn.
 | ==        | equal to                  | 2 == 2        | 2          |
 | \>        | greater than              | 9 > 8         | 2          |
 | <         | less than                 | 6 < 7         | 2          |
+
 ##### Logical operators
+
 | Operators | Name | Example                | Precedence |
 |-----------|------|------------------------|:----------:|
 | !         | not  | !(true) = false        | 1          |
