@@ -12,7 +12,7 @@ precedence = (
 	('right', 'NOT'),
 )
 
-#calc
+# calc
 def p_calc(p):
 	'calc : element calc'
 	p[0] = [p[1]] + p[2]
@@ -20,7 +20,7 @@ def p_calc_empty(p):
 	'calc : '
 	p[0] = [ ]
 
-#element
+# element
 def p_element_function(p):
 	'element : FUNCTION IDENTIFIER LPAREN optparams RPAREN compoundstmt'
 	p[0] = ("function", p[2], p[4], p[6])
@@ -28,7 +28,7 @@ def p_element_sstmt(p):
 	'element : sstmt'
 	p[0] = ("stmt", p[1])
 
-#optparams
+# optparams
 def p_optparams_params(p):
 	'optparams : params'
 	p[0] = p[1]
@@ -36,7 +36,7 @@ def p_optparams_empty(p):
 	'optparams : '
 	p[0] = [ ]
 
-#params
+# params
 def p_params(p):
 	'params : IDENTIFIER COMMA params'
 	p[0] = [p[1]] + p[3]
@@ -44,12 +44,12 @@ def p_params_one(p):
 	'params : IDENTIFIER'
 	p[0] = [p[1]]
 
-#compoundstmt
+# compoundstmt
 def p_compoundstmt(p):
 	'compoundstmt : LBRACE stmts RBRACE'
 	p[0] = p[2]
 
-#stmts
+# stmts
 def p_stmts(p):
 	'stmts : sstmt stmts'
 	p[0] = [p[1]] + p[2]
@@ -57,7 +57,7 @@ def p_stmts_empty(p):
 	'stmts : '
 	p[0] = [ ]
 
-#stmt_or_compound
+# stmt_or_compound
 def p_stmt_or_compound(p):
 	'stmt_or_compound : sstmt'
 	p[0] = [p[1]]
@@ -65,7 +65,6 @@ def p_stmt_or_compound_c(p):
 	'stmt_or_compound : compoundstmt'
 	p[0] = p[1]
 
-###############################################
 #optsemi
 def p_optsemi_none(p):
 	'optsemi : '
@@ -73,9 +72,8 @@ def p_optsemi_none(p):
 def p_optsemi_semicolon(p):
 	'optsemi : SEMICOLON'
 	p[0] = p[0]
-###############################################
 
-#sstmt
+# sstmt
 def p_sstmt_if(p):
 	'sstmt : IF exp stmt_or_compound optsemi'
 	p[0] = ("if", p[2], p[3])
@@ -95,7 +93,7 @@ def p_sstmt_exp(p):
 	'sstmt : exp SEMICOLON'
 	p[0] = ("exp", p[1])
 
-#exp
+# exp
 def p_exp_identifier(p):
 	'exp : IDENTIFIER'
 	p[0] = ("identifier", p[1])
@@ -133,7 +131,7 @@ def p_exp_call(p):
 	'exp : IDENTIFIER LPAREN optargs RPAREN'
 	p[0] = ("call", p[1], p[3])
 
-#optargs
+# optargs
 def p_optargs(p):
 	'optargs : args'
 	p[0] = p[1]
@@ -141,10 +139,18 @@ def p_optargs_empty(p):
 	'optargs : '
 	p[0] = [ ]
 
-#args
+# args
 def p_args(p):
 	'args : exp COMMA args'
 	p[0] = [p[1]] + p[3]
 def p_args_one(p):
 	'args : exp'
 	p[0] = [p[1]]
+
+# error
+def p_error(p):
+	if p:
+		print "Syntax error at ",
+		print p.value
+	else:
+		print "Syntax error at EOF"
