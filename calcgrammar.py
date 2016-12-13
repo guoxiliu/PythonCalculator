@@ -90,7 +90,7 @@ def p_sstmt_return(p):
 	p[0] = ("return", p[2])
 def p_sstmt_define(p):
 	'sstmt : DEFINE IDENTIFIER EQUAL exp SEMICOLON'
-	p[0] = ("define", p[4])
+	p[0] = ("define", p[2], p[4])
 def p_sstmt_exp(p):
 	'sstmt : exp SEMICOLON'
 	p[0] = ("exp", p[1])

@@ -152,9 +152,12 @@ def eval_exp(exp, env):
 		if fname == "out":
 			argval = eval_exp(args[0], env)
 			output_sofar = env_lookup("calculator output", env)
-			env_update("calculator output", output_sofar + str(argval), env)
+			env_update("calculator output", output_sofar + '\n' + str(argval), env)
 
 		# More functions
+		elif fname == "quit":
+			print "Goodbye ~"
+			exit(1)
 
 		elif fvalue[0] == "function":
 			# ("function", params, body, env)
