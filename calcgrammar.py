@@ -121,6 +121,7 @@ def p_exp_binop(p):
 		| exp MOD exp
 		| exp DIVIDE exp
 		| exp EQUEQU exp
+		| exp NOTEQU exp
 		| exp LE exp
 		| exp LT exp
 		| exp GE exp

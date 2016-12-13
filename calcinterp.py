@@ -130,6 +130,8 @@ def eval_exp(exp, env):
 			return a % b
 		elif op == "==":
 			return a == b
+		elif op == "!=":
+			return a != b	
 		elif op == "<=":
 			return a <= b
 		elif op == "<":

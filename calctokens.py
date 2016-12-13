@@ -15,6 +15,7 @@ tokens = (
 	'ANDAND',		# &&
 	'OROR', 		# ||
 	'EQUEQU', 		# ==
+	'NOTEQU', 		# !=
 	'NOT', 			# !
 	'GE',			# >=
 	'GT', 			# >
@@ -66,6 +67,7 @@ t_MOD 		= r'%'
 t_ANDAND 	= r'&&'
 t_OROR 		= r'\|\|'
 t_EQUEQU	= r'=='
+t_NOTEQU	= r'!='
 t_NOT 		= r'!'
 t_GE 		= r'>='
 t_GT 		= r'>'

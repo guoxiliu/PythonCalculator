@@ -14,7 +14,6 @@ while True:
     for line in iter(raw_input, stopword):
         content += line + '\n'
     
-    print content
     calclexer = lex.lex(module=calctokens)
     calcparser = yacc.yacc(module=calcgrammar, tabmodule='parsetab')
     ast = calcparser.parse(content, lexer=calclexer)
