@@ -81,7 +81,7 @@ def p_sstmt_if(p):
 	p[0] = ("if", p[2], p[3])
 def p_sstmt_if_else(p):
 	'sstmt : IF exp compoundstmt ELSE stmt_or_compound optsemi'
-	p[0] = ("if", p[2], p[3], p[5])
+	p[0] = ("if-else", p[2], p[3], p[5])
 def p_sstmt_assigment(p):
 	'sstmt : IDENTIFIER EQUAL exp SEMICOLON'
 	p[0] = ("assign", p[1], p[3])
