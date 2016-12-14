@@ -2,5 +2,5 @@
 *.py[cod]
 
 # Yacc output
-.out
-parsetab.pyc
+*.out
+parsetab.py
