@@ -125,6 +125,9 @@ def eval_exp(exp, env):
 		elif op == "*":
 			return a * b
 		elif op == "/":
+			if b == 0:
+				print "ERROR: divisor can't be zero!"
+				return ''
 			return a / b
 		elif op == "%":
 			return a % b
@@ -154,7 +157,8 @@ def eval_exp(exp, env):
 		if fname == "out":
 			argval = eval_exp(args[0], env)
 			output_sofar = env_lookup("calculator output", env)
-			env_update("calculator output", output_sofar + '\n' + str(argval), env)
+			if str(argval) != '':
+				env_update("calculator output", output_sofar + str(argval) + '\n', env)
 
 		# More functions
 		elif fname == "quit":
