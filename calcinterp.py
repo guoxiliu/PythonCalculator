@@ -6,8 +6,10 @@
 #		string->value)				-- maps identifiers to values
 #
 
+from optimization import optimize
+
 class CalcReturn(Exception):
-	# "Phrasing return" as an exception allows us to break out of 
+	# "Phrasing return" as an exception allows us to break out of
 	# any nested statement evaluation and return to the caller
 	# immediately.
 	def __init__(self, retval):
@@ -94,9 +96,10 @@ def eval_stmt(stmt, env):
 		print "ERROR: unknown statement type: " + stype
 
 def eval_exp(exp, env):
-	etype = exp[0]
+	optimalexp = optimize(exp)
+	etype = optimalexp[0]
 	# print "eval_exp: ",
-	# print exp
+	# print optimalexp
 
 	if etype == "identifier":
 		vname = exp[1]
@@ -107,23 +110,23 @@ def eval_exp(exp, env):
 		else:
 			return value
 	elif etype == "number":
-		return float(exp[1])
+		return float(optimalexp[1])
 	elif etype == "string":
-		return exp[1]
+		return optimalexp[1]
 	elif etype == "true":
 		return True
 	elif etype == "false":
 		return False
 	elif etype == "not":
-		return not(eval_exp(exp[1], env))
+		return not(eval_exp(optimalexp[1], env))
 	elif etype == "function":
-		fparams = exp[1]
-		fbody = exp[2]
+		fparams = optimalexp[1]
+		fbody = optimalexp[2]
 		return ("function", fparams, fbody, env)
 	elif etype == "binop":
-		a = eval_exp(exp[1], env)
-		op = exp[2]
-		b = eval_exp(exp[3], env)
+		a = eval_exp(optimalexp[1], env)
+		op = optimalexp[2]
+		b = eval_exp(optimalexp[3], env)
 		if op == "+":
 			return a + b
 		elif op == "-":
@@ -157,8 +160,8 @@ def eval_exp(exp, env):
 			print "ERROR: unknown binary operator: " + op
 			exit(1)
 	elif etype == "call":
-		fname = exp[1]
-		args = exp[2]
+		fname = optimalexp[1]
+		args = optimalexp[2]
 		fvalue = env_lookup(fname, env)
 		if fname == "out":
 			argval = eval_exp(args[0], env)
