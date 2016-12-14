@@ -13,6 +13,7 @@ which has its own programming language, and is very easy to learn.
 
 | Keyword   | Usage                 |
 |---------  |-----------------------|
+| out       | output result         |
 | define    | declare a variable    |
 | function  | to declare a function |
 | return    | return to caller      |
@@ -40,7 +41,7 @@ which has its own programming language, and is very easy to learn.
 | \+        | plus      | 1 + 1 = 2     | 2          |
 | \-        | minus     | 13 - 6 = 7    | 2          |
 
-##### Relational 
+##### Relational operators
 
 | Operators | Name                      | Example       | Precedence |
 |-----------|:--------------------------|:--------------|:----------:|
@@ -58,5 +59,50 @@ which has its own programming language, and is very easy to learn.
 | &&        | and  | true && false =  false | 2          |
 | \|\|      | or   | true \|\| false = true | 2          |
 
+### Structures
+#### Sequential 
+##### Arithmetic laws
+
+- sample code:
+``` 
+define a = 10.5;
+define b = 4;
+out(a + b);
+out(a - b);
+out(a * b);
+out(a / b);
+```
+- sample output:
+```
+14.5
+6.5
+42.0
+2.625
+```
+
+##### Logical laws
+
+- sample code:
+```
+define x = true;
+define y = false;
+out(x && x);
+out(y && y);
+out(x && y);
+out(x || x);
+out(y || y);
+out(x || y);
+```
+- sample output:
+```
+True
+False
+False
+True
+False
+True
+```
 
 
+## Error Handling
+### Lexical analyzer
