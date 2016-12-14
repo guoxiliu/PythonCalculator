@@ -77,6 +77,9 @@ def p_optsemi_semicolon(p):
 def p_sstmt_if(p):
 	'sstmt : IF exp stmt_or_compound optsemi'
 	p[0] = ("if", p[2], p[3])
+def p_sstmt_while(p):
+	'sstmt : WHILE exp compoundstmt optsemi'
+	p[0] = ("while", p[2], p[3])
 def p_sstmt_if_else(p):
 	'sstmt : IF exp compoundstmt ELSE stmt_or_compound optsemi'
 	p[0] = ("if-else", p[2], p[3], p[5])
@@ -152,5 +155,7 @@ def p_error(p):
 	if p:
 		print "Syntax error at ",
 		print p.value
+		exit(1)
 	else:
 		print "Syntax error at EOF"
+		exit(1)

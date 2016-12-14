@@ -72,6 +72,11 @@ def eval_stmt(stmt, env):
 			eval_stmts(then_branch, env)
 		else:
 			eval_stmts(else_branch, env)
+	elif stype == "while":
+		cexp = stmt[1]
+		while_body = stmt[2]
+		while eval_exp(cexp, env):
+			eval_stmts(while_body, env)
 	elif stype == "define":
 		vname = stmt[1]
 		rhs = stmt[2]
@@ -98,6 +103,7 @@ def eval_exp(exp, env):
 		value = env_lookup(vname, env)
 		if value == None:
 			print "ERROR: unbound variable: " + vname
+			return ''
 		else:
 			return value
 	elif etype == "number":

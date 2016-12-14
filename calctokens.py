@@ -33,6 +33,7 @@ tokens = (
 	'DEFINE',		# define
 	'FUNCTION',		# function
 	'RETURN',		# return
+	'WHILE',		# while
 	'IF',			# if
 	'ELSE',			# else
 	'TRUE',			# true
@@ -57,7 +58,7 @@ def t_comment_end(t):
 def t_comment_error(t):
 	t.lexer.skip(1)
 
-reversed = ['define', 'function', 'return', 'if', 'else', 'true', 'false']
+reversed = ['define', 'function', 'return', 'while', 'if', 'else', 'true', 'false']
 
 t_PLUS 		= r'\+'
 t_MINUS 	= r'-'
@@ -103,6 +104,10 @@ def t_FUNCTION(t):
 
 def t_RETURN(t):
 	r'return'
+	return t
+
+def t_WHILE(t):
+	r'while'
 	return t
 
 def t_IF(t):
