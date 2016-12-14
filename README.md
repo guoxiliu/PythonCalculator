@@ -57,51 +57,60 @@ which has its own programming language, and is very easy to learn.
 |-----------|------|------------------------|:----------:|
 | !         | not  | !(true) = false        | 1          |
 | &&        | and  | true && false =  false | 2          |
-| \|\|      | or   | true \|\| false = true | 2          |
+| &#124;&#124;| or   | true &#124;&#124; false = true | 2|
 
 ### Structures
 #### Sequential 
 ##### Arithmetic laws
 
-- sample code:
+- sample code: 
+
 ``` 
-define a = 10.5;
-define b = 4;
-out(a + b);
-out(a - b);
-out(a * b);
-out(a / b);
+define a = 10.5; 
+define b = 4; 
+out(a + b); 
+out(a - b); 
+out(a * b); 
+out(a / b); 
 ```
-- sample output:
+
+- sample output: 
+
 ```
-14.5
-6.5
-42.0
-2.625
+14.5 
+6.5 
+42.0 
+2.625 
 ```
 
 ##### Logical laws
 
-- sample code:
+- sample code: 
+
 ```
-define x = true;
-define y = false;
-out(x && x);
-out(y && y);
-out(x && y);
-out(x || x);
-out(y || y);
-out(x || y);
+define x = true; 
+define y = false; 
+out(x && x); 
+out(y && y); 
+out(x && y); 
+out(x || x); 
+out(y || y); 
+out(x || y); 
 ```
-- sample output:
+
+- sample output: 
+
 ```
-True
-False
-False
-True
-False
-True
+True 
+False 
+False 
+True 
+False 
+True 
 ```
+
+#### Branch
+##### IF 
 
 
 ## Error Handling
