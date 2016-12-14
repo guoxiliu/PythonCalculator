@@ -31,14 +31,14 @@ def optimize(exp):
         # Arithmetic Laws
         if op == "*" and (a == ("number", 0) or b == ("number", 0)):
             return ("number", 0)
-        elif op == "*" and a == ("number", 1) and b != ("number", 0):
+        elif op == "*" and a == ("number", 1):
             return b
-        elif op == "*" and b == ("number", 1) and a != ("number", 0):
+        elif op == "*" and b == ("number", 1):
             return a
-        elif op == "/" and a == ("number", 0) and b != ("number", 0):
+        elif op == "/" and a == ("number", 0):
             return ("number", 0)
-        elif op == "/" and b == ("number", 1) and a != ("number", 0):
-            return ("number", a)
+        elif op == "/" and b == ("number", 1):
+            return a
         elif op == "+" and a == ("number", 0):
             return b
         elif op == "+" and b == ("number", 0):
@@ -47,17 +47,21 @@ def optimize(exp):
             return ("number", 0)
         elif op == "-" and b == ("number", 0):
             return ("number", a)
+        elif op == "^" and b == ("number", 0):
+            return ("number", 1)
 
         # Constant Folding
         if a[0] == "number" and b[0] == "number":
             if op == "+":
-                return ("number", a[1]+b[1])
+                return ("number", a[1] + b[1])
             elif op == "-":
-                return ("number", a[1]-b[1])
+                return ("number", a[1] - b[1])
             elif op == "*":
-                return ("number", a[1]*b[1])
+                return ("number", a[1] * b[1])
             elif op == "/":
-                return ("number", a[1]/b[1])
+                return ("number", a[1] / b[1])
+            elif op == "^":
+                return ("number", a[1] ** b[1])
 
         # Boolean Laws
         if op == "&&" and (a == ("true", "true") and b == ("true", "true")):

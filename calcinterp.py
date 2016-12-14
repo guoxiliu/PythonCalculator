@@ -6,6 +6,7 @@
 #		string->value)				-- maps identifiers to values
 #
 
+import math
 from optimization import optimize
 
 class CalcReturn(Exception):
@@ -105,6 +106,10 @@ def eval_exp(exp, env):
 		vname = exp[1]
 		value = env_lookup(vname, env)
 		if value == None:
+			if vname == "pi":
+				return math.pi
+			elif vname == "e":
+				return math.e
 			print "ERROR: unbound variable: " + vname
 			return ''
 		else:
@@ -135,11 +140,13 @@ def eval_exp(exp, env):
 			return a * b
 		elif op == "/":
 			if b == 0:
-				print "ERROR: divisor can't be zero!"
+				print "ERROR: divisor can't be zero"
 				return ''
 			return a / b
 		elif op == "%":
 			return a % b
+		elif op == "^":
+			return a ** b
 		elif op == "==":
 			return a == b
 		elif op == "!=":
@@ -159,21 +166,68 @@ def eval_exp(exp, env):
 		else:
 			print "ERROR: unknown binary operator: " + op
 			exit(1)
+	
+	# Call function
 	elif etype == "call":
 		fname = optimalexp[1]
 		args = optimalexp[2]
 		fvalue = env_lookup(fname, env)
 		if fname == "out":
-			argval = eval_exp(args[0], env)
-			output_sofar = env_lookup("calculator output", env)
-			if str(argval) != '':
-				env_update("calculator output", output_sofar + str(argval) + '\n', env)
+			if args == []:
+				print 'ERROR: Nothing to output'
+			else:
+				argval = eval_exp(args[0], env)
+				output_sofar = env_lookup("calculator output", env)
+				if str(argval) != '':
+					env_update("calculator output", output_sofar + str(argval) + '\n', env)
 
-		# More functions
+		# Quit function
 		elif fname == "quit":
 			print "Goodbye ~"
 			exit(1)
+		
+		# Trigonometric functions
+		elif fname == "sin":
+			argval = eval_exp(args[0], env)
+			return math.sin(argval)
+		elif fname == "cos":
+			argval = eval_exp(args[0], env)
+			return math.cos(argval)	
+		elif fname == "tan":
+			argval = eval_exp(args[0], env)
+			return math.tan(argval)
 
+		# Anti-trigonometric functions
+		elif fname == "sinh":
+			argval = eval_exp(args[0], env)
+			return math.sinh(argval)
+		elif fname == "cosh":
+			argval = eval_exp(args[0], env)
+			return math.cosh(argval)
+		elif fname == "tanh":
+			argval = eval_exp(args[0], env)
+			return math.tanh(argval)
+		
+		# Logarithmic functions
+		elif fname == "ln":
+			argval = eval_exp(args[0], env)
+			return math.log1p(argval)
+		elif fname == "lg":
+			argval = eval_exp(args[0], env)
+			return math.log10(argval)
+
+		# Other useful functions
+		elif fname == "sqrt":
+			argval = eval_exp(args[0], env)
+			if argval < 0:
+				print "ERROR: argument must be positive number in sqrt function"
+			else:
+				return math.sqrt(argval)
+		
+		elif fvalue == None:
+			print "ERROR: call to non-function: " + fname
+
+		# Self-defined functions
 		elif fvalue[0] == "function":
 			# ("function", params, body, env)
 			fparams = fvalue[1]
@@ -185,7 +239,7 @@ def eval_exp(exp, env):
 				# make a new environment frame
 				newenv = (fenv, {})
 				for i in range(len(args)):
-					argval = eval_exp(args[i], fenv)
+					argval = eval_exp(args[i], env)
 					newenv[1][fparams[i]] = argval
 				# evaluate the body in the new frame
 				try:
@@ -193,8 +247,6 @@ def eval_exp(exp, env):
 					return None
 				except CalcReturn as r:
 					return r.retval
-		else:
-			print "ERROR: call to non-function: " + fname
 
 	else:
 		print "ERROR: unknown expression type: " + etype

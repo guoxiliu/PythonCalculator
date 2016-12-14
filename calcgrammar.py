@@ -120,6 +120,7 @@ def p_exp_binop(p):
 		| exp MINUS exp
 		| exp TIMES exp
 		| exp MOD exp
+		| exp POWER exp
 		| exp DIVIDE exp
 		| exp EQUEQU exp
 		| exp NOTEQU exp
@@ -153,9 +154,10 @@ def p_args_one(p):
 # error
 def p_error(p):
 	if p:
-		print "Syntax error at ",
-		print p.value
-		exit(1)
+		print "Syntax error at",
+		print p.value,
+		print "in line ",
+		print p.lineno
 	else:
 		print "Syntax error at EOF"
 		exit(1)

@@ -12,6 +12,7 @@ tokens = (
 	'TIMES', 		# *
 	'DIVIDE', 		# /
 	'MOD',			# %
+	'POWER', 		# ^
 	'ANDAND',		# &&
 	'OROR', 		# ||
 	'EQUEQU', 		# ==
@@ -65,6 +66,7 @@ t_MINUS 	= r'-'
 t_TIMES 	= r'\*'
 t_DIVIDE 	= r'/'
 t_MOD 		= r'%'
+t_POWER		= r'\^'
 t_ANDAND 	= r'&&'
 t_OROR 		= r'\|\|'
 t_EQUEQU	= r'=='
@@ -90,7 +92,8 @@ def t_newline(t):
 	t.lexer.lineno += 1
 
 def t_error(t):
-	print 'Calculator Lexer: Illegal character ' + t.value[0]
+	print 'Illegal character: ' + t.value[0] + ' in line',
+	print t.lineno
 	t.lexer.skip(1)
 
 # String tokens
@@ -152,6 +155,7 @@ def test_lexer(input_string):
 # case_1 = '''
 # 	# Hello, here is our first test case!
 # 	define x = 1 + 2;
+#	define x = 2 ^ 3;
 # 	define y = true;
 # 	define z = false;
 # '''
