@@ -10,6 +10,7 @@ precedence = (
 	('left', 'PLUS', 'MINUS'),
 	('left', 'TIMES', 'DIVIDE', 'MOD'),
 	('right', 'NOT'),
+	('left', 'POWER'),
 )
 
 # calc
@@ -156,7 +157,7 @@ def p_error(p):
 	if p:
 		print "Syntax error at",
 		print p.value,
-		print "in line ",
+		print "in line",
 		print p.lineno
 	else:
 		print "Syntax error at EOF"

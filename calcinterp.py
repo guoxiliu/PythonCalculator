@@ -1,5 +1,5 @@
 #
-# This is an interpreter for  the calculator.
+# This is an interpreter for the calculator.
 #
 # Environment is a tuple:
 #		(parent-pointer,			-- can be None for global environment
@@ -16,6 +16,7 @@ class CalcReturn(Exception):
 	def __init__(self, retval):
 		self.retval = retval
 
+# Look up given variable in the environment
 def env_lookup(vname, env):
 	if vname in env[1]:
 		return (env[1])[vname]
@@ -24,12 +25,14 @@ def env_lookup(vname, env):
 	else:
 		return env_lookup(vname, env[0])
 
+# Update local variable to given value
 def env_update(vname, value, env):
 	if vname in env[1]:
 		env[1][vname] = value
 	elif env[0] != None:
 		env_update(vname, value, env[0])
 
+# Update global variable to given value
 def global_env_update(vname, value, env):
 	if vname in env[1] or (env[0] == None):
 		env[1][vname] = value
@@ -43,6 +46,7 @@ def env_debug(env):
 		print "  env[" + vname + "] = ",
 		print env[1][vname]
 
+# Evaluate element AST
 def eval_elt(elt, env):
 	if elt[0] == "function":
 		fname = elt[1]
@@ -55,10 +59,12 @@ def eval_elt(elt, env):
 	else:
 		print "ERROR: eval_elt: unknown element " + elt
 
+# Evaluate statements
 def eval_stmts(stmts, env):
 	for stmt in stmts:
 		eval_stmt(stmt, env)
 
+# Evaluate statement
 def eval_stmt(stmt, env):
 	stype = stmt[0]
 	# print stype
@@ -96,7 +102,9 @@ def eval_stmt(stmt, env):
 	else:
 		print "ERROR: unknown statement type: " + stype
 
+# Evaluate expression
 def eval_exp(exp, env):
+	# Optimize expression first
 	optimalexp = optimize(exp)
 	etype = optimalexp[0]
 	# print "eval_exp: ",
@@ -116,8 +124,6 @@ def eval_exp(exp, env):
 			return value
 	elif etype == "number":
 		return float(optimalexp[1])
-	elif etype == "string":
-		return optimalexp[1]
 	elif etype == "true":
 		return True
 	elif etype == "false":
@@ -183,9 +189,11 @@ def eval_exp(exp, env):
 
 		# Quit function
 		elif fname == "quit":
+			# No care about arguments
 			print "Goodbye ~"
 			exit(1)
 		
+		# Built-in functions here ...
 		# Trigonometric functions
 		elif fname == "sin":
 			argval = eval_exp(args[0], env)
@@ -224,6 +232,7 @@ def eval_exp(exp, env):
 			else:
 				return math.sqrt(argval)
 		
+		# Oops, no function found in the environment
 		elif fvalue == None:
 			print "ERROR: call to non-function: " + fname
 
@@ -248,6 +257,7 @@ def eval_exp(exp, env):
 				except CalcReturn as r:
 					return r.retval
 
+	# Expression type we don't support'
 	else:
 		print "ERROR: unknown expression type: " + etype
 

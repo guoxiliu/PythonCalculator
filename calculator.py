@@ -17,7 +17,18 @@ while True:
         content += line + '\n'
 
     calclexer = lex.lex(module=calctokens)
+    # print "Lexical Analyzer:"
+    # calclexer.input(content)
+    # lexerout = []
+    # while True:
+    #     tok = calclexer.token()
+    #     if not tok:
+    #         break
+    #     lexerout = lexerout + [(tok.type, tok.value)]
+    # print lexerout
+
     calcparser = yacc.yacc(module=calcgrammar, tabmodule='parsetab')
     ast = calcparser.parse(content, lexer=calclexer)
+    # print "Abstract Syntax Tree: "
     # print ast
     print calcinterp.interpret(ast)

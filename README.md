@@ -14,7 +14,7 @@ which has its own programming language, and is very easy to learn.
 |---------------|-----------------------|
 | **out**       | output result         |
 | **define**    | declare a variable    |
-| **function**  | to declare a function |
+| **function**  | declare a function    |
 | **return**    | return to caller      |
 | **if**        | implement branch      |
 | **else**      | implement branch      |
@@ -185,7 +185,7 @@ function factorial(number) {
     if (number == 1) { 
         return 1; 
     } else { 
-        return number * test(number - 1); 
+        return number * factorial(number - 1); 
     } 
 } 
 ```
