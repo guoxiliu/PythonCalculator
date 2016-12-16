@@ -58,8 +58,6 @@ def optimize(exp):
                 return ("number", a[1] - b[1])
             elif op == "*":
                 return ("number", a[1] * b[1])
-            elif op == "/":
-                return ("number", a[1] / b[1])
             elif op == "^":
                 return ("number", a[1] ** b[1])
 

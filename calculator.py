@@ -9,10 +9,12 @@ import calcgrammar
 import calcinterp
 from functools import partial       # Handle input
 
+global_env = (None, {"calculator output" : ""})
+
 while True:
-    prompt = partial(raw_input, ">>> ")
-    stopword = ''
-    content = ''
+    prompt = partial(raw_input, ">>> ")				# Wait for user input
+    stopword = ''			# Stop when encounter blank line
+    content = ''			# Store user input
     for line in iter(prompt, stopword):
         content += line + '\n'
 
@@ -31,4 +33,8 @@ while True:
     ast = calcparser.parse(content, lexer=calclexer)
     # print "Abstract Syntax Tree: "
     # print ast
-    print calcinterp.interpret(ast)
+    run_env = global_env
+    run_env[1]["calculator output"] = ""	 # Clear last calculation result
+    global_env = calcinterp.interpret(ast, run_env)
+    print global_env[1]["calculator output"]
+

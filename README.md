@@ -1,14 +1,14 @@
-***
-## **Introduction**
+# **![icon](calc.png)<br/>Simple Programmable Calculator<br/>**
+## **I. Introduction**
 This project is to build a simple programmable calculator, 
-which has its own programming language, and is very easy to learn. 
-## **Prerequisite**
-- Build language: Python 2.7 
-- Package: ply 
+which has its own language, and is very easy to learn. 
+## **II. Prerequisite**
+- Programming language: Python 2.7 
+- Package: ply (Lex and Yacc were used) 
 
-## **Language**
-### Basic grammar 
-#### Reserved keyword 
+## **III. Language**
+### 1. Basic grammar 
+#### 1.1 Reserved keyword 
 
 | Keyword       | Usage                 |
 |---------------|-----------------------|
@@ -21,15 +21,15 @@ which has its own programming language, and is very easy to learn.
 | **true**      | boolean value         |
 | **false**     | boolean value         |
 
-#### Identifier 
-##### Built-in identifier 
+#### 1.2 Identifier 
+##### 1.2.1 Built-in identifier 
 
 | Name  | Value         |
 |-------|---------------|
 | **pi**| 3.14159265359 |
 | **e** | 2.71828182846 |
 
-##### Usage 
+##### 1.2.2 Usage 
 - All identifier begins with letters (A-Z or a-z) 
 - There can be letters or underscore after the first character
 - Identifier is case-sensitive 
@@ -38,8 +38,8 @@ which has its own programming language, and is very easy to learn.
 - Valid identifier: age, length_of_table 
 - Invalid indentifier: _age, lengt1_of_table 
 
-#### Operators 
-##### Arithmetic operators 
+#### 1.3 Operators 
+##### 1.3.1 Arithmetic operators 
 
 | Operators | Name      | Example       | Precedence |
 |-----------|:----------|:--------------|:----------:|
@@ -50,7 +50,7 @@ which has its own programming language, and is very easy to learn.
 | \+        | plus      | 1 + 1 = 2     | 2          |
 | \-        | minus     | 13 - 6 = 7    | 2          |
 
-##### Relational operators 
+##### 1.3.2 Relational operators 
 
 | Operators | Name                      | Example       | Precedence |
 |-----------|:--------------------------|:--------------|:----------:|
@@ -61,7 +61,7 @@ which has its own programming language, and is very easy to learn.
 | \>        | greater than              | 9 > 8         | 2          |
 | <         | less than                 | 6 < 7         | 2          |
 
-##### Logical operators 
+##### 1.3.3 Logical operators 
 
 | Operators | Name | Example                | Precedence |
 |-----------|------|------------------------|:----------:|
@@ -69,9 +69,9 @@ which has its own programming language, and is very easy to learn.
 | &&        | and  | true && false =  false | 2          |
 | &#124;&#124;| or   | true &#124;&#124; false = true | 2|
 
-### Structures 
-#### Sequential 
-##### Arithmetic laws 
+### 2. Structures 
+#### 2.1 Sequential 
+##### 2.1.1 Arithmetic laws 
 sample code: 
 
 ```
@@ -91,7 +91,7 @@ sample output:
 2.625 
 ```
 
-##### Logical laws 
+##### 2.1.2 Logical laws 
 sample code: 
 
 ```
@@ -115,8 +115,8 @@ False
 True 
 ```
 
-#### Branch 
-##### IF 
+#### 2.2 Branch 
+##### 2.2.1 IF 
 sample code: 
 
 ```
@@ -132,7 +132,7 @@ sample output:
 1.0 
 ```
 
-##### IF-ELSE 
+##### 2.2.2 IF-ELSE 
 sample code: 
 
 ```
@@ -150,7 +150,7 @@ sample output:
 2.0 
 ```
 
-#### Loop 
+#### 2.3 Loop 
 sample code: 
 
 ```
@@ -168,8 +168,8 @@ sample output:
 5.0 
 ```
 
-### Function 
-#### Define a function 
+### 3. Function 
+#### 3.1 Define a function 
 sample code: 
 
 ```
@@ -190,8 +190,8 @@ function factorial(number) {
 } 
 ```
 
-#### Call a function 
-##### Built-in functions 
+#### 3.2 Call a function 
+##### 3.2.1 Built-in functions 
 sample code: 
 
 ```
@@ -218,7 +218,7 @@ sample output:
 13.0 
 ```
 
-##### Self-defined functions 
+##### 3.2.2 Self-defined functions 
 sample code: 
 
 ```
@@ -236,5 +236,53 @@ sample output:
 6.0 
 ```
 
-## **Error Handling**
-### Lexical analyzer
+## **IV. Error Handling**
+### 4.1 Lexical analyzer 
+sample code: 
+
+```
+@
+$
+```
+
+sample output: 
+
+```
+Illegal character: @ in line 1 
+Illegal character: $ in line 2 
+```
+
+### 4.2 Syntax analyzer 
+sample code: 
+
+```
+functions max() {} 
+out(1 ++ 1); 
+out(2016) 
+```
+
+sample output: 
+
+```
+Syntax error at max in line 1 
+Syntax error at + in line 2 
+Syntax error at EOF 
+```
+
+### 4.3 Interpreter 
+sample code: 
+
+```
+out(13 / 0); 
+sqrt(-625); 
+out(a + 1); 
+love(9 * 9); 
+```
+
+sample output: 
+```
+ERROR: divisor can't be zero 
+ERROR: argument must be positive number in sqrt function 
+ERROR: unbound variable: a 
+ERROR: call to non-function: love 
+```
